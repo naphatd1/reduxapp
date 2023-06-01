@@ -33,7 +33,7 @@ export default function HomePage() {
                 <Toolbar>
                     <CameraIcon sx={{ mr: 2 }} />
                     <Typography variant="h6" color="inherit" noWrap>
-                        ระบบลาอออนไลน์
+                        ระบบMaintenance
                     </Typography>
                 </Toolbar>
             </AppBar>
