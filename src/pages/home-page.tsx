@@ -9,17 +9,23 @@ import Container from '@mui/material/Container';
 // import Link from '@mui/material/Link';
 import FooterPage from './footer-page';
 import { Link as RouterLink } from 'react-router-dom'
+// import { Copyright } from '@mui/icons-material';
+
 
 // function Copyright() {
 //     return (
-//         <Typography variant="body2" color="text.secondary" align="center">
-//             {'Copyright © '}
-//             <Link color="inherit" href="https://mui.com/">
-//                 Your Website
-//             </Link>{' '}
-//             {new Date().getFullYear()}
-//             {'.'}
-//         </Typography>
+//         <>
+//             <Container>
+//                 <Typography variant="body2" color="text.secondary" align="center">
+//                     {'Copyright © '}
+//                     <Link color="inherit" href="https://mui.com/">
+//                         Your Website
+//                     </Link>{' '}
+//                     {new Date().getFullYear()}
+//                     {'.'}
+//                 </Typography>
+//             </Container>
+//         </>
 //     );
 // }
 
@@ -29,12 +35,26 @@ import { Link as RouterLink } from 'react-router-dom'
 export default function HomePage() {
     return (
         <>
-            <AppBar position="relative">
+            <AppBar >
                 <Toolbar>
                     <CameraIcon sx={{ mr: 2 }} />
                     <Typography variant="h6" color="inherit" noWrap>
-                        ระบบ Maintenance
+                        Maintenance
                     </Typography>
+                    <Box sx={{flexGrow: 1}}></Box>
+                    <Box>
+                        <Button variant="contained" component={RouterLink} to='/login'  sx={{
+                            background: 'linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)',
+                            marginRight: '10px'
+                        }}>
+                            Login
+                        </Button>
+                        <Button variant="contained" component={RouterLink} to='/register' sx={{
+                            background: 'radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);'
+                        }}>
+                            Register
+                        </Button>
+                    </Box>
                 </Toolbar>
             </AppBar>
             <main>
@@ -46,15 +66,15 @@ export default function HomePage() {
                         pb: 6,
                     }}
                 >
-                    <Container maxWidth="sm">
+                    <Container maxWidth="lg" sx={{ paddingTop: 10 }}>
                         <Typography
                             component="h1"
-                            variant="h2"
+                            variant="h3"
                             align="center"
                             color="text.primary"
                             gutterBottom
                         >
-                            ระบบ Maintenance
+                            React Redux Firebase
                         </Typography>
                         <Stack
                             sx={{ pt: 4 }}
@@ -71,14 +91,14 @@ export default function HomePage() {
                         </Stack>
                     </Container>
                 </Box>
-
             </main>
             <FooterPage />
             {/* Footer */}
             {/* <Box sx={{
                 py: 3,
                 px: 2,
-                mt: 'auto', bgcolor: 'grey.200', p: 6
+                mt: 'auto', bgcolor: 'grey.200', p: 6,
+                top: 0
             }} component="footer">
                 <Typography variant="h6" align="center" gutterBottom>
                     ระบบลาอออนไลน์

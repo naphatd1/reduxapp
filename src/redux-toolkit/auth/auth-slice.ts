@@ -18,9 +18,9 @@ export const authSlice = createSlice({
     initialState: initialState,
     reducers: {},
     extraReducers(builder) {
-        builder.addCase(getCurrentAccountThunk.pending, (state, action) => {
-            state.isAuthLoading = true
-        })
+        // builder.addCase(getCurrentAccountThunk.pending, (state, action) => {
+        //     state.isAuthLoading = true
+        // })
         builder.addCase(getCurrentAccountThunk.fulfilled, (state, action) => {
             state.account = action.payload
             state.isAuthLoading = false

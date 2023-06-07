@@ -1,11 +1,14 @@
 import { UserCredential, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { firebaseApp } from "../configs/firebase";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { doc, getDoc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import { Account } from "../app-types/account-type";
+import { getDownloadURL, getStorage, ref, uploadString } from "firebase/storage";
+import { getBase64 } from "../utils/img-to-base64";
 
 
 const auth = getAuth(firebaseApp)
 const db = getFirestore(firebaseApp)
+const storage = getStorage(firebaseApp);
 
 export async function registerUser(
     firstName: string,
@@ -61,5 +64,31 @@ export async function getCurrentAccount(userId: string) {
         ...accTmp
     }
     return account
-
 }
+//update Account
+export async function updateAccount(userId: string, acc: Account): Promise<void> {
+    await updateDoc(doc(db, "users", userId), {
+      firstName: acc.firstName,
+      lastName: acc.lastName
+    });
+  }
+  
+  //upload image to storage
+export async function uploadImageAndUpdatePhotoURL(userId: string, picture: FileList) {
+
+    const base64Image = await getBase64(picture);
+  
+    const storageRef = ref(storage, 'user/' + userId + '/avatar');
+  
+    //upload base64 data url string
+    await uploadString(storageRef, base64Image, "data_url");
+  
+    //get image url from server (storage)
+    const imageUrl = await getDownloadURL(storageRef);
+  
+    //update photo_url
+    await updateDoc(doc(db, "users", userId), {
+      photoUrl: imageUrl
+    })
+  
+  }

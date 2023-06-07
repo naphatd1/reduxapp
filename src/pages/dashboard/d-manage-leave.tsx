@@ -1,3 +1,4 @@
+import { withAdminGuard } from "../../hocs/with-admin-guard"
 
 
 const DmangeLeave = () => {
@@ -6,4 +7,4 @@ const DmangeLeave = () => {
   )
 }
 
-export default DmangeLeave
+export default withAdminGuard(DmangeLeave)
